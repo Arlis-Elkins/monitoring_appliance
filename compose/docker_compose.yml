@@ -1,0 +1,44 @@
+services:
+
+  uptime-kuma:
+    image: louislam/uptime-kuma:2
+    container_name: uptime-kuma
+
+    restart: always
+
+    ports:
+      - "3001:3001"
+
+    environment:
+      TZ: ${TIMEZONE}
+
+    volumes:
+      - uptime-kuma:/app/data
+
+  hawser:
+    image: ghcr.io/finsys/hawser:latest
+    container_name: hawser
+
+    restart: unless-stopped
+
+    ports:
+      - "2376:2376"
+
+    environment:
+      TZ: ${TIMEZONE}
+      TOKEN: ${HAWSER_TOKEN}
+      PORT: 2376
+      DOCKER_SOCKET: /var/run/docker.sock
+      STACKS_DIR: /data/stacks
+
+    volumes:
+      - hawser-data:/data/stacks
+      - /var/run/docker.sock:/var/run/docker.sock
+
+volumes:
+
+  uptime-kuma:
+    external: true
+
+  hawser-data:
+    external: true

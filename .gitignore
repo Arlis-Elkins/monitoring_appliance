@@ -1,0 +1,20 @@
+# Environment files
+.env*
+
+# Credentials
+credentials*
+*.secret
+
+# Logs
+*.log
+
+# Backup archives
+*.tar.gz
+*.zip
+
+# VS Code
+.vscode/
+
+# OS junk
+.DS_Store
+Thumbs.db
