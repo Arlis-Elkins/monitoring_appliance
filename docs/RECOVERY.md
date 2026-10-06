@@ -138,7 +138,7 @@ ls -lh "$MOUNT_POINT/$SMB_SUBFOLDER"
 Restore the archive you want:
 
 ```bash
-sudo ./restore.sh uptime-kuma-2026-10-06.tar.gz
+sudo /opt/monitoring-appliance/scripts/restore.sh <filename>
 ```
 
 Then unmount:

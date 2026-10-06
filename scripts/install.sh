@@ -104,8 +104,10 @@ fi
 
 echo "Adding user $USER to docker group..."
 if ! groups "$USER" | grep -q "\bdocker\b"; then
-    usermod -aG docker "$USER"
-    echo "User $USER added to docker group. You may need to log out and back in for this to take effect."
+    if ! id -nG "$TARGET_USER" | grep -qw docker; then
+        usermod -aG docker "$USER"
+        echo "Log out and back in for this to take effect."
+    fi
 fi
 
 #
