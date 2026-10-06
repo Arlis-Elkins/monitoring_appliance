@@ -139,7 +139,6 @@ Restore the archive you want:
 
 ```bash
 sudo ./restore.sh uptime-kuma-2026-10-06.tar.gz
-~~*sudo ./scripts/restore.sh "$MOUNT_POINT/$SMB_SUBFOLDER/uptime-kuma-2026-10-03.tar.gz"*~~
 ```
 
 Then unmount:
