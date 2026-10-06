@@ -99,6 +99,16 @@ if ! docker volume inspect hawser-data >/dev/null 2>&1; then
 fi
 
 #
+#Add User to Docker Group
+#
+
+echo "Adding user $USER to docker group..."
+if ! groups "$USER" | grep -q "\bdocker\b"; then
+    usermod -aG docker "$USER"
+    echo "User $USER added to docker group. You may need to log out and back in for this to take effect."
+fi
+
+#
 # Schedule weekly backup
 #
 
