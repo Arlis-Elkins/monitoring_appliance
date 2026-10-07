@@ -99,13 +99,15 @@ if ! docker volume inspect hawser-data >/dev/null 2>&1; then
 fi
 
 #
-#Add User to Docker Group
+# Add the invoking user to the docker group
 #
 
-echo "Adding user $USER to docker group..."
-if ! groups "$USER" | grep -q "\bdocker\b"; then
+TARGET_USER="${SUDO_USER:-}"
+
+if [[ -n "$TARGET_USER" && "$TARGET_USER" != "root" ]]; then
     if ! id -nG "$TARGET_USER" | grep -qw docker; then
-        usermod -aG docker "$USER"
+        echo "Adding user $TARGET_USER to docker group..."
+        usermod -aG docker "$TARGET_USER"
         echo "Log out and back in for this to take effect."
     fi
 fi
@@ -115,8 +117,10 @@ fi
 #
 
 set -a
+# shellcheck source=/dev/null
 source "$APP_DIR/.env"
 set +a
+
 
 echo "$BACKUP_SCHEDULE root $APP_DIR/scripts/uptime-kuma-backup.sh >> /var/log/uptime-kuma-backup.log 2>&1" \
     > /etc/cron.d/monitoring-appliance-backup
