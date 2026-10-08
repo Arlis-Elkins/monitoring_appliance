@@ -122,7 +122,8 @@ The script will:
 Use this to roll back to a particular date, recover a deleted monitor, or avoid a
 bad latest backup.
 
-Restore the archive you want:
+Backups are named `uptime-kuma-YYYY-MM-DD.tar.gz` and live in the `SMB_SUBFOLDER`
+folder on your backup share. Pick the file you want, then run:
 
 ```bash
 sudo /opt/monitoring-appliance/scripts/restore.sh <filename>
@@ -130,7 +131,7 @@ sudo /opt/monitoring-appliance/scripts/restore.sh <filename>
 
 The restore script will:
 
-1. Mount the share using the values in `.env` (skipped if it is already mounted)
+1. Mount the share using the values in `.env`
 2. Verify the archive; a missing or corrupt file stops the script before anything is changed
 3. Stop the containers
 4. Delete and recreate the Uptime Kuma volume (existing data is replaced)

@@ -11,6 +11,7 @@ Complete configuration for a Lab monitoring appliance.
 
 - A Debian or Ubuntu host (the installer uses `apt-get`)
 - An SMB share for backups, configured in `.env`
+- `git` (`sudo apt install git -y` if it isn't already installed)
 
 The installer sets up Docker, the Compose plugin, `cifs-utils`, and `cron` if they are missing.
 
