@@ -1,6 +1,6 @@
 # Monitoring Appliance Recovery Guide
 
-This document covers recovery of the ElkLab Monitoring Appliance hosted on Hudson.
+This document covers recovery of the Monitoring Appliance hosted on Raspberry Pi. Tested on Raspberry Pi hardware running both 32-bit (armhf) and 64-bit (arm64) Debian.
 
 The appliance is designed to be rebuilt from source control and restored from backup
 with minimal manual configuration. Target recovery time: approximately 15 minutes.
@@ -122,37 +122,21 @@ The script will:
 Use this to roll back to a particular date, recover a deleted monitor, or avoid a
 bad latest backup.
 
-The share is normally unmounted, so mount it first using the values in `.env`:
-
-```bash
-cd /opt/monitoring-appliance
-set -a; source .env; set +a
-
-sudo mkdir -p "$MOUNT_POINT"
-sudo mount -t cifs "//$SMB_SERVER/$SMB_SHARE" "$MOUNT_POINT" \
-    -o "username=$SMB_USER,password=$SMB_PASS,vers=$SMB_VERSION"
-
-ls -lh "$MOUNT_POINT/$SMB_SUBFOLDER"
-```
-
 Restore the archive you want:
 
 ```bash
 sudo /opt/monitoring-appliance/scripts/restore.sh <filename>
 ```
 
-Then unmount:
-
-```bash
-sudo umount "$MOUNT_POINT"
-```
-
 The restore script will:
 
-1. Stop the containers
-2. Delete and recreate the Uptime Kuma volume (existing data is replaced)
-3. Extract the selected archive
-4. Restart the containers
+1. Mount the share using the values in `.env` (skipped if it is already mounted)
+2. Verify the archive; a missing or corrupt file stops the script before anything is changed
+3. Stop the containers
+4. Delete and recreate the Uptime Kuma volume (existing data is replaced)
+5. Extract the selected archive
+6. Restart the containers
+7. Unmount the share
 
 ---
 
