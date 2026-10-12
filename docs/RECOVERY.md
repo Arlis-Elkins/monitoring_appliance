@@ -1,6 +1,6 @@
 # Monitoring Appliance Recovery Guide
 
-This document covers recovery of the Monitoring Appliance hosted on Raspberry Pi. Tested on Raspberry Pi hardware running both 32-bit (armhf) and 64-bit (arm64) Debian.
+This document covers recovery of the Monitoring Appliance hosted on Raspberry Pi. Tested on Raspberry Pi hardware running both 32-bit (armhf) and 64-bit (arm64) Raspberry Pi OS.
 
 The appliance is designed to be rebuilt from source control and restored from backup
 with minimal manual configuration. Target recovery time: approximately 15 minutes.

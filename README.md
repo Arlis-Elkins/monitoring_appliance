@@ -2,6 +2,9 @@
 
 Complete configuration for a Lab monitoring appliance.
 
+Developed with AI assistance and reviewed, tested, and integrated by the project author.
+Tested on Raspberry Pi hardware running both 32-bit (armhf) and 64-bit (arm64) Raspberry Pi OS.
+
 ## Services
 
 - **Uptime Kuma**: self-hosted uptime monitoring and status dashboard.
